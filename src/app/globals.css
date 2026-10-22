@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --font-serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+
+html {
+  background: #0B0C0F;
+  color: #E9E6E1;
+  color-scheme: dark;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  font-family: var(--font-sans);
+}
+
+/* Redacted bar used in the hero */
+.redact {
+  display: inline-block;
+  background: #E9E6E1;
+  color: transparent;
+  border-radius: 2px;
+  user-select: none;
+}
+
+.field {
+  @apply w-full rounded-md border border-edge bg-panel px-3 py-2.5 text-[15px] text-bone outline-none transition placeholder:text-haze/60 focus:border-gold focus:ring-2 focus:ring-gold/20;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-md bg-gold px-5 py-3 text-[15px] font-semibold text-night transition hover:bg-gold-bright disabled:cursor-not-allowed disabled:opacity-40;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center rounded-md border border-edge px-5 py-3 text-[15px] font-semibold text-bone transition hover:border-bone/60;
+}
