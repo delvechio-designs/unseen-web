@@ -113,6 +113,31 @@ export async function sendNotice(opts: { to: string; subject: string; body: stri
   });
 }
 
+export async function sendAdminDigest(opts: {
+  toVerify: number;
+  needNotice: number;
+  monitorNew: number;
+  stale: number;
+  reappeared: number;
+}) {
+  const to = process.env.ADMIN_NOTIFY_EMAIL;
+  if (!to) return;
+  const lines = [
+    [opts.toVerify, "accounts waiting for verification"],
+    [opts.needNotice, "reported leaks waiting for a notice"],
+    [opts.monitorNew, "new monitor candidates to review"],
+    [opts.stale, "notices with no result after 7 days"],
+    [opts.reappeared, "removed links that came back"],
+  ].filter(([n]) => (n as number) > 0);
+  await client().sendEmail({
+    From: from(),
+    To: to,
+    Subject: `Unseen today: ${lines.map(([n]) => n).reduce((a, b) => (a as number) + (b as number), 0)} things need you`,
+    MessageStream: "outbound",
+    TextBody: lines.map(([n, label]) => `${n} ${label}`).join("\n") + `\n\nOpen the dashboard: ${siteUrl()}/admin`,
+  });
+}
+
 export async function sendMonthlyReport(opts: {
   to: string;
   displayName: string;
