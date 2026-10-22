@@ -19,9 +19,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <Link href="/" className="text-[15px] font-bold tracking-[0.3em]">
               UNSEEN
             </Link>
-            <Link href="/start" className="text-sm font-semibold text-gold hover:text-gold-bright">
-              Get protected
-            </Link>
+            <div className="flex items-center gap-5">
+              <Link href="/portal" className="text-sm font-semibold text-haze hover:text-bone">
+                Sign in
+              </Link>
+              <Link href="/start" className="text-sm font-semibold text-gold hover:text-gold-bright">
+                Get protected
+              </Link>
+            </div>
           </div>
         </header>
         {children}
